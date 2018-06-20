@@ -1,18 +1,4 @@
 <!-- Components info: https://webdev.dartlang.org/components -->
-<div>
-  <material-input label="What do you need to do?"
-                  autoFocus floatingLabel style="width:80%"
-                  [(ngModel)]="newTodo"
-                  (keyup.enter)="add()">
-  </material-input>
-
-  <material-fab mini raised
-                (trigger)="add()"
-                [disabled]="newTodo.isEmpty">
-    <glyph icon="add"></glyph>
-  </material-fab>
-</div>
-
 <p *ngIf="items.isEmpty">
   Nothing to do! Add items above.
 </p>
@@ -28,4 +14,19 @@
         </material-fab>
       </li>
   </ul>
+</div>
+
+
+<div>
+  <material-input label="New item"
+                  autoFocus floatingLabel style="width:80%"
+                  [(ngModel)]="newTodo"
+                  (keyup.enter)="add()">
+  </material-input>
+
+  <material-fab mini raised
+                (trigger)="add()"
+                [disabled]="newTodo.isEmpty">
+    <glyph icon="add"></glyph>
+  </material-fab>
 </div>
