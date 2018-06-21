@@ -4,6 +4,7 @@ import 'package:angular/angular.dart';
 import 'package:angular_components/angular_components.dart';
 
 import 'todo_list_service.dart';
+import 'TodoItem.dart';
 
 @Component(
   selector: 'todo-list',
@@ -18,7 +19,7 @@ import 'todo_list_service.dart';
 class TodoListComponent implements OnInit {
   final TodoListService todoListService;
 
-  List<String> items = [];
+  List<TodoItem> items = [];
   String newTodo = '';
   String searchKeyword = '';
 
@@ -29,25 +30,28 @@ class TodoListComponent implements OnInit {
     items = await todoListService.getTodoList();
   }
 
-  List<String> getItems() {
+  List<TodoItem> getItems() {
     if (searchKeyword == "") {
       return items;
     } else {
       return
         items
           .where((item) =>
-            item.toLowerCase().contains(searchKeyword.toLowerCase())
+            item.name.toLowerCase().contains(searchKeyword.toLowerCase())
           )
           .toList();
     }
   }
 
   void add() {
-    items.add(newTodo);
+    items.add(new TodoItem(
+      newTodo,
+      new DateTime.now()
+    ));
     newTodo = '';
   }
 
-  String remove(int index) => items.removeAt(index);
+  TodoItem remove(int index) => items.removeAt(index);
   void onReorder(ReorderEvent e) =>
       items.insert(e.destIndex, items.removeAt(e.sourceIndex));
 }
