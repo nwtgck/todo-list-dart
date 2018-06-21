@@ -14,7 +14,12 @@
       <li *ngFor="let item of getItems(); let i=index">
         <material-checkbox #done materialTooltip="Mark item as done">
         </material-checkbox>
-        <span [class.done]="done.checked">{{item.name}}</span>
+        <span [class.done]="done.checked">
+          <span style="background: #ccc; border-radius: 5px; padding: 0.5em; margin-right: 1em;">
+          {{item.createdAt | date}}
+          </span>
+          {{item.name}}
+        </span>
         <material-fab mini (trigger)="remove(i)">
           <glyph icon="delete"></glyph>
         </material-fab>
