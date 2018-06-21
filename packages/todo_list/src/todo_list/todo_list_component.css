@@ -23,3 +23,8 @@ li material-fab {
 .done {
   text-decoration: line-through;
 }
+
+.item_number_msg {
+  font-size: 1.5em;
+  font-weight: bold;
+}
