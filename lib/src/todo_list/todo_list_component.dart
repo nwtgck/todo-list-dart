@@ -15,6 +15,8 @@ import 'TodoItem.dart';
     materialDirectives,
   ],
   providers: const [TodoListService],
+  // (from: https://webdev.dartlang.org/angular/guide/pipes)
+  pipes: const [COMMON_PIPES],
 )
 class TodoListComponent implements OnInit {
   final TodoListService todoListService;
