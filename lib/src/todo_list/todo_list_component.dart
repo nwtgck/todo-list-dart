@@ -20,12 +20,26 @@ class TodoListComponent implements OnInit {
 
   List<String> items = [];
   String newTodo = '';
+  String searchKeyword = '';
 
   TodoListComponent(this.todoListService);
 
   @override
   Future<Null> ngOnInit() async {
     items = await todoListService.getTodoList();
+  }
+
+  List<String> getItems() {
+    if (searchKeyword == "") {
+      return items;
+    } else {
+      return
+        items
+          .where((item) =>
+            item.toLowerCase().contains(searchKeyword.toLowerCase())
+          )
+          .toList();
+    }
   }
 
   void add() {

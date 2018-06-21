@@ -1,11 +1,17 @@
 <!-- Components info: https://webdev.dartlang.org/components -->
+
+<material-input label="Input search keyword"
+                autoFocus floatingLabel style="width:80%"
+                [(ngModel)]="searchKeyword">
+</material-input>
+
 <p *ngIf="items.isEmpty">
   Nothing to do! Add items above.
 </p>
 
 <div *ngIf="items.isNotEmpty">
   <ul>
-      <li *ngFor="let item of items; let i=index">
+      <li *ngFor="let item of getItems(); let i=index">
         <material-checkbox #done materialTooltip="Mark item as done">
         </material-checkbox>
         <span [class.done]="done.checked">{{item}}</span>
