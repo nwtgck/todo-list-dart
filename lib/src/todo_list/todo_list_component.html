@@ -5,16 +5,22 @@
                 [(ngModel)]="searchKeyword">
 </material-input>
 
-<p *ngIf="items.isEmpty">
-  Nothing to do! Add items above.
-</p>
+<h1 *ngIf="allFinished() && items.isNotEmpty" class="item_number_msg" style="margin: 1em;">
+  Finished all!
+</h1>
+
+<div *ngIf="!allFinished()" style="margin: 1em;">
+  <div class="item_number_msg">Total: {{items.length}}</div>
+  <div class="item_number_msg">Finished: {{finishedItems().length}}</div>
+</div>
+
 
 <div *ngIf="items.isNotEmpty">
   <ul>
       <li *ngFor="let item of getItems(); let i=index">
-        <material-checkbox #done materialTooltip="Mark item as done">
+        <material-checkbox materialTooltip="Mark item as done" [(ngModel)]="item.isFinished">
         </material-checkbox>
-        <span [class.done]="done.checked">
+        <span [class.done]="item.isFinished">
           <span style="background: #ccc; border-radius: 5px; padding: 0.5em; margin-right: 1em;">
           {{item.createdAt | date}}
           </span>

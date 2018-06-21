@@ -24,6 +24,7 @@ class TodoListComponent implements OnInit {
   List<TodoItem> items = [];
   String newTodo = '';
   String searchKeyword = '';
+  DateTime statsDate = new DateTime.now();
 
   TodoListComponent(this.todoListService);
 
@@ -45,10 +46,20 @@ class TodoListComponent implements OnInit {
     }
   }
 
+  List<TodoItem> finishedItems() {
+      return items.where((item) => item.isFinished).toList();
+  }
+
+  bool allFinished() {
+    return items.fold(true, (acc, item) => acc && item.isFinished);
+  }
+
+
   void add() {
     items.add(new TodoItem(
       newTodo,
-      new DateTime.now()
+      new DateTime.now(),
+      false
     ));
     newTodo = '';
   }
